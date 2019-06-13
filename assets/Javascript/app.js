@@ -4,7 +4,7 @@ $(document).ready(function(){
 $("#body").hide();
 $("#win-screen").hide();
 $("#start").on('click', startGame);
-// Set up Correct, Uncorrect and Unanswered counters
+// Variables for Correct, Uncorrect and Unanswered counters
     let right = 0;
     let wrong= 0;
     let unanswered = 0;
