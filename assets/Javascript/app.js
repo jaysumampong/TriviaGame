@@ -3,7 +3,7 @@ $(document).ready(function(){
 // Set Event Listeners
 $("#timer").hide();
 $("#win-screen").hide();
-$("#start").on('click', startGame);
+$("#start").on("click", startGame);
 
 // Variables 
     let right = 0;
@@ -38,14 +38,16 @@ $("#start").on('click', startGame);
     {
         question: "what does Cassiopiea use as a weapon?",
         answer: ["Steel", "Fire", "Poison", "Summon's"],
+        keyword: "Poison",
     }];
 
     // Set up HTML
     function updateDom(){
         for (let i = 0; i < wordBank.length; i++){
             $("#questions").append("<h3>" + wordBank[i].question + "</h3>");
-            for (let x = 0; x < wordBank.length; x++){
-                $("#questions").append('<input type="radio" name="question' + '-' + x + '" value="' + wordBank[x].answer[x] + '">' + wordBank[x].answer[x]);
+            for (let x = 0; x < wordBank[i].answer.length; x++){
+                $("#questions").append('<input type="radio" name="question' + '-' + i + '" value="' + wordBank[i].answer[x] + '">' + wordBank[i].answer[x]);
+                // console.log(wordBank[i].answer);
             }
         }
     };
@@ -60,7 +62,6 @@ $("#start").on('click', startGame);
         updateDom();
         timerStart();
         guessChecker();
-        
     };
 
     function timerStart() { 
@@ -83,24 +84,37 @@ $("#start").on('click', startGame);
     // set up functions to determine if answers are right or wrong
     function correctAnswer(){
         right++;
+        console.log("this is right: " + right);
         $("#correct").html(right);
     };
 
     function incorrectAnswer(){
         wrong++;
+        console.log("this is wrong: " + wrong);
         $("#incorrect").html(wrong);
     };
-
+    // Couldn't figure out how to implement unanswered
     function notanswered(){
         unanswered++;
         $("#unanswered").html(unanswered);
     };
+
+
+    // not sure why the right and wrong counters are not being recorded
     function guessChecker(){
         let playerAnswer = $("#questions").children("input:checked");
-        if ($(playerAnswer[i].val()=== wordBank.keyword)) {
+        for (let i = 0; i < playerAnswer.length; i++){
+            if ($(playerAnswer[i]).val() === wordBank[i].keyword) {
             correctAnswer();
-        } else {
-            incorrectAnswer();
+            console.log("this is right " + right);
+            }    else {
+                incorrectAnswer();
+                console.log("this is wrong: " + wrong);
+            }
         }
     };
+    $(document).on("click", "#guessChecker", function() {
+        guessChecker();
+      });
+      
 });
