@@ -18,7 +18,7 @@ $("#start").on("click", startGame);
     
     {
         question: "Who bears the title of Thunder's Roar?",
-        answer: ["Pyke", "Volibear", "Tayliyah", " Kennen"],
+        answer: ["Pyke", "Volibear", "Taliyah", " Kennen"],
         keyword: "Volibear",
 
     },
@@ -113,8 +113,5 @@ $("#start").on("click", startGame);
             }
         }
     };
-    $(document).on("click", "#guessChecker", function() {
-        guessChecker();
-      });
       
 });
