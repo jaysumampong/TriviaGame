@@ -1,22 +1,65 @@
 $(document).ready(function(){
 
 // Set Event Listeners
-$("#body").hide();
+$("#timer").hide();
 $("#win-screen").hide();
 $("#start").on('click', startGame);
-// Variables for Correct, Uncorrect and Unanswered counters
+
+// Variables 
     let right = 0;
     let wrong= 0;
     let unanswered = 0;
+    // let keywords = ["Valoran", "Volibear", "Graggy Ice", "Poison"];
+    let wordBank = [{
+        question: "In which continent does League of Legends reside",
+        answer: ["Bandle City", "Demacia", "Valoran", "Bilgewater"],
+        keyword: "Valoran",    
+    },
     
+    {
+        question: "Who bears the title of Thunder's Roar?",
+        answer: ["Pyke", "Volibear", "Tayliyah", " Kennen"],
+        keyword: "Volibear",
+
+    },
+    
+    {
+        question: "What is the name of Gragas' homemade special brew?",
+        answer: ["Dalaran Brew", "Graggy Ice", "Butter Beer", "Apple Spice Ale"],
+        keyword: "Graggy Ice",
+    },
+    
+    {
+        question: "Which Champion is the owner of a sunscreen brand?",
+        answer: ["Vayne", "Sona", "Hecarim", "Taric"],
+        keyword: "Taric",
+    },
+    
+    {
+        question: "what does Cassiopiea use as a weapon?",
+        answer: ["Steel", "Fire", "Poison", "Summon's"],
+    }];
+
+    // Set up HTML
+    function updateDom(){
+        for (let i = 0; i < wordBank.length; i++){
+            $("#questions").append("<h3>" + wordBank[i].question + "</h3>");
+            for (let x = 0; x < wordBank.length; x++){
+                $("#questions").append('<input type="radio" name="question' + '-' + x + '" value="' + wordBank[x].answer[x] + '">' + wordBank[x].answer[x]);
+            }
+        }
+    };
+
     // Set up Function for timer interval
-    let number = 3;
+    let number = 14;
     let intervalId;
 
     function startGame() {
-        $("#body").show();
+        $("#timer").show();
         $("#start").hide();
+        updateDom();
         timerStart();
+        guessChecker();
         
     };
 
@@ -34,32 +77,30 @@ $("#start").on('click', startGame);
     };
 
     function winScreen() {
-        $("#body").hide();
+        $("#Container").hide();
         $("#win-screen").show();
     };
     // set up functions to determine if answers are right or wrong
     function correctAnswer(){
         right++;
+        $("#correct").html(right);
     };
 
     function incorrectAnswer(){
         wrong++;
+        $("#incorrect").html(wrong);
     };
 
     function notanswered(){
         unanswered++;
+        $("#unanswered").html(unanswered);
     };
-
-    // Trivia questions
-    let triviaQuestions = {
-
-    }
-
-
-
-
-
-
-
-
-})
+    function guessChecker(){
+        let playerAnswer = $("#questions").children("input:checked");
+        if ($(playerAnswer[i].val()=== wordBank.keyword)) {
+            correctAnswer();
+        } else {
+            incorrectAnswer();
+        }
+    };
+});
