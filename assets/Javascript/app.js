@@ -53,7 +53,7 @@ $("#start").on("click", startGame);
     };
 
     // Set up Function for timer interval
-    let number = 14;
+    let number = 30;
     let intervalId;
 
     function startGame() {
