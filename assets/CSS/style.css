@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("Images/HD-Draven-Backgrounds.png");
+    text-align: center;
+}
+
+#win-screen {
+    font-size: 30px;
+}
+
+h1{
+    font-size: 50px;
+}
+
+#start {
+    display:inline-block;
+    padding: 14px 40px;
+    background-color: royalblue;
+    font-size: 30px;
+    color: white;
+    border: 2px solid #555555;
+
+}
